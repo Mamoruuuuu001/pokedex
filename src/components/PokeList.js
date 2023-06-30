@@ -6,7 +6,7 @@ function PokeList() {
 const[allPokemons,setAllPokemons]=useState([]);
 
 const getAllPokemons = async()=> {
-    const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=649&offset=0");
+    const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0");
     const data = await res.json();
 
     function createPokemonObject(results)
@@ -33,7 +33,7 @@ useEffect(()=>{
             <div className="all-container">
                 {allPokemons.map((pokemonStats)=>(
                     <PokemonCard
-                    key={pokemonStats.id}
+                    key={pokemonStats.name}
                     
                     id={pokemonStats.id.toString().padStart(4,"0")}
                     
@@ -49,6 +49,7 @@ useEffect(()=>{
 
                     //only hp attack and def lets modify it later
                     stats={pokemonStats.stats.map((stat)=>stat.base_stat).slice(0,3)}
+                    statsName={pokemonStats.stats.map((stat)=>stat.stat.name).slice(0,3)}
                     />
                 ))}
             </div>
